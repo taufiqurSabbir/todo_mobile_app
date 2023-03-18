@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
   },
 
   tasks: {
-    padding: 20,
+    padding: 10,
   },
 
   itemLeft: {
@@ -40,12 +40,15 @@ const styles = StyleSheet.create({
     backgroundColor: "#19A7CE",
     borderRadius: 5,
     opacity: 0.5,
+    marginRight: 10,
   },
   circle: {
-    width: 15,
-    height: 15,
-    backgroundColor: "#19A7CE",
-    borderRadius: 10,
+    width: 12,
+    height: 12,
+    backgroundColor: "#fff",
+    borderWidth: 2,
+    borderColor: "#19A7CE",
+    borderRadius: 5,
   },
 });
 
