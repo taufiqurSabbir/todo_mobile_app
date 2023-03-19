@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Button } from "react-native";
 
 const Task = (props) => {
   return (
@@ -9,7 +9,14 @@ const Task = (props) => {
         <Text style={styles.tasks}>{props.text}</Text>
       </View>
 
-      <View style={styles.circle}></View>
+      <View style={styles.circle}>
+        <Button
+          color="#5D9C59"
+          style={{ borderRadius: 500 }}
+          onPress={props.donebtn}
+          title="Done"
+        />
+      </View>
     </View>
   );
 };
@@ -43,13 +50,15 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   circle: {
-    width: 12,
-    height: 12,
+    width: 80,
+    height: "100%",
     backgroundColor: "#fff",
-    borderWidth: 2,
+    justifyContent: "space-between",
     borderColor: "#19A7CE",
     borderRadius: 5,
   },
+
+  donebtn: {},
 });
 
 export default Task;

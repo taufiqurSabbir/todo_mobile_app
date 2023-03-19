@@ -8,14 +8,26 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
   Platform,
+  ScrollView,
+  SafeAreaView,
+  Keyboard,
 } from "react-native";
 import Task from "./components/task";
 
 export default function App() {
   const [task, setTask] = useState();
+  const [taskItem, setTaskItem] = useState([]);
 
-  const handdleaddTas = () => {
-    console.log(task);
+  const completeTask = (index) => {
+    let itemCopy = [...taskItem];
+    itemCopy.splice(index, 1);
+    setTaskItem(itemCopy);
+  };
+
+  const handdleaddTask = () => {
+    Keyboard.dismiss();
+    setTaskItem([...taskItem, task]);
+    setTask(null);
   };
   return (
     <View style={styles.container}>
@@ -24,13 +36,19 @@ export default function App() {
         <Text style={styles.title}>Today's Task</Text>
 
         {/*task list start*/}
-        <View style={styles.items}>
-          <Task text={"task-1"} />
-          <Task text={"task-2"} />
-          <Task text={"task-3"} />
-          <Task text={"task-4"} />
-          <Task text={"task-5"} />
-        </View>
+        <SafeAreaView style={styles.items}>
+          <ScrollView style={styles.scrollView}>
+            {taskItem.map((item, index) => {
+              return (
+                <Task
+                  key={index}
+                  text={item}
+                  donebtn={() => completeTask(index)}
+                />
+              );
+            })}
+          </ScrollView>
+        </SafeAreaView>
         {/*task list end*/}
       </View>
 
@@ -42,9 +60,10 @@ export default function App() {
         <TextInput
           style={styles.input}
           placeholder={"Write Today's Task"}
+          value={task}
           onChangeText={(text) => setTask(text)}
         />
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => handdleaddTask()}>
           <View style={styles.addWrapper}>
             <Text style={styles.addtext}>+</Text>
           </View>
@@ -61,6 +80,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#E8EAED",
     justifyContent: "space-between",
   },
+  scrollView: {},
 
   taskWapper: {
     paddingTop: 80,
